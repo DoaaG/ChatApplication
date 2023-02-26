@@ -2,8 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+<!--58-->
     <data>
+        <variable
+            name="dataLogin"
+            type="com.example.chatapplication.login.LogInViewModel" />
 
     </data>
 
@@ -47,11 +50,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/email"
+            error="@{dataLogin.email}"
             app:layout_constraintTop_toBottomOf="@+id/welcome">
 
             <EditText
                 android:id="@+id/editTextEmail"
                 style="@style/fieldsStyle"
+                android:text="@={dataLogin.emailError}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -63,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            error="@{dataLogin.password}"
             android:hint="@string/password"
             app:layout_constraintTop_toBottomOf="@+id/email_Login_TextInputLayout">
 
@@ -73,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:text="@={dataLogin.passwordError}"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:onClick="@{()->dataLogin.login()}"
             android:drawableEnd="@drawable/ic_arrow_forward"
             android:gravity="start"
             android:padding="18dp"

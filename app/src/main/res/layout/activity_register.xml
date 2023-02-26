@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="dataRegister"
+            type="com.example.chatapplication.register.RegisterViewModel" />
 
     </data>
 
@@ -34,12 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            error="@{dataRegister.firstNameError}"
             android:hint="@string/first_name"
             app:layout_constraintTop_toBottomOf="@+id/guidLine">
 
             <EditText
                 android:id="@+id/editTextFirstname"
                 style="@style/fieldsStyle"
+                android:text="@={dataRegister.firstName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -47,16 +52,38 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastname_createAcc_TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="@string/last_name"
+            error="@{dataRegister.lastNameError}"
+            app:layout_constraintTop_toBottomOf="@+id/firstname_createAcc_TextInputLayout">
+
+            <EditText
+                android:id="@+id/editTextLastname"
+                style="@style/fieldsStyle"
+                android:text="@={dataRegister.lastName}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_address_TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/e_mail_address"
-            app:layout_constraintTop_toBottomOf="@+id/firstname_createAcc_TextInputLayout">
+            error="@{dataRegister.email}"
+            app:layout_constraintTop_toBottomOf="@+id/lastname_createAcc_TextInputLayout">
 
             <EditText
                 android:id="@+id/editTextEmailAddress"
                 style="@style/fieldsStyle"
+                android:text="@={dataRegister.email}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -69,12 +96,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/password"
+            error="@{dataRegister.password}"
             app:layout_constraintTop_toBottomOf="@+id/email_address_TextInputLayout">
 
 
             <EditText
                 android:id="@+id/editTextPassword_createAcc"
                 style="@style/fieldsStyle"
+                android:text="@={dataRegister.password}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -86,6 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
+            android:onClick="@{()->dataRegister.createAccount()}"
             android:drawableEnd="@drawable/ic_arrow_forward"
             android:gravity="start"
             android:padding="18dp"
