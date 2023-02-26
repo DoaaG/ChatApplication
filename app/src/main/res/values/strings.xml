@@ -18,4 +18,5 @@
     <string name="create_account">Create Account</string>
     <string name="first_name">First Name</string>
     <string name="e_mail_address">E-mail Address</string>
+    <string name="last_name">Last Name</string>
 </resources>
