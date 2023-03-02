@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.chatapplication.login.LogInActivity
+import com.example.chatapplication.register.RegisterActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -15,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({ startActivity() }, 2000)
     }
     private fun startActivity() {
-        val intent = Intent(this , MainActivity::class.java)
+        val intent = Intent(this , LogInActivity::class.java)
         startActivity(intent)
     }
 }

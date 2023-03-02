@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/e_mail_address"
-            error="@{dataRegister.email}"
+            error="@{dataRegister.emailError}"
             app:layout_constraintTop_toBottomOf="@+id/lastname_createAcc_TextInputLayout">
 
             <EditText
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/password"
-            error="@{dataRegister.password}"
+            error="@{dataRegister.passwordError}"
             app:layout_constraintTop_toBottomOf="@+id/email_address_TextInputLayout">
 
 
@@ -115,11 +115,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
-            android:onClick="@{()->dataRegister.createAccount()}"
             android:drawableEnd="@drawable/ic_arrow_forward"
             android:gravity="start"
+            android:onClick="@{()->dataRegister.createAccount()}"
             android:padding="18dp"
             android:text="Create Account"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_create_TextInputLayout" />
@@ -129,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_back"
+            android:onClick="@{()->dataRegister.finish()}"
             app:layout_constraintBottom_toBottomOf="@id/create_account_TextView"
             app:layout_constraintStart_toStartOf="@id/create_account_TextView"
             app:layout_constraintTop_toTopOf="@id/create_account_TextView" />

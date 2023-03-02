@@ -19,4 +19,11 @@
     <string name="first_name">First Name</string>
     <string name="e_mail_address">E-mail Address</string>
     <string name="last_name">Last Name</string>
+
+    <string-array name="categories">
+        <item>Select Room Category</item>
+        <item>Movies</item>
+        <item>Message</item>
+        <item>Group</item>
+    </string-array>
 </resources>
