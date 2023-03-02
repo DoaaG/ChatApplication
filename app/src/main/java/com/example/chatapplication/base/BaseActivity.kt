@@ -11,60 +11,41 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.chatapplication.register.RegisterViewModel
 
-open abstract class BaseActivity<viewModel : ViewModel, binding : ViewDataBinding> :
-    AppCompatActivity() {
+open abstract class BaseActivity<viewModel : BaseViewModel<*>, binding : ViewDataBinding> :
+    AppCompatActivity(),BaseNavigator {
     lateinit var binding: binding
     lateinit var viewModel: viewModel
     var alertDialog: AlertDialog? = null
+    var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutActivity())
         viewModel = getClassViewModel()
-
+        viewModel.navigator = this
     }
 
     abstract fun getLayoutActivity(): Int
     abstract fun getClassViewModel(): viewModel
 
-
-    fun showMessage(
-        message: String,
-        positiveActionTitle: String? = null,
-        positiveAction: DialogInterface.OnClickListener? = null,
-        negativeActionTitle: String? = null,
-        negativeAction: DialogInterface.OnClickListener? = null,
-        cancelable: Boolean = true
-    ) {
-        var messageDialogBuilder = AlertDialog.Builder(this)
-        messageDialogBuilder.setMessage(message)
-
-        if (positiveActionTitle != null) {
-            messageDialogBuilder.setPositiveButton(
-                positiveActionTitle,
-                positiveAction ?: DialogInterface.OnClickListener { dialog, which ->
-                    dialog.dismiss()
-                })
-        }
-        if (negativeActionTitle != null) {
-            messageDialogBuilder.setNegativeButton(
-                negativeActionTitle,
-                negativeAction ?: DialogInterface.OnClickListener { dialog, which ->
-                    dialog.dismiss()
-                })
-        }
-        messageDialogBuilder.setCancelable(cancelable)
-        alertDialog = messageDialogBuilder.show()
-
+    override fun showLoading(message: String) {
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setMessage(message)
+        progressDialog?.show()
     }
 
+    override fun hide() {
+        progressDialog?.dismiss()
+        progressDialog = null
+        alertDialog?.dismiss()
+    }
 
+    override fun showMessage(message: String) {
+        alertDialog =
+            AlertDialog.Builder(this)
+                .setMessage(message).setPositiveButton("Ok")
+                { dialogInterface, i -> dialogInterface.dismiss() }.show()
+    }
 
 }
-/**
-override fun getLayoutActivity(): Int = R.layout.activity_register
-override fun getClassViewModel(): ViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
-override fun getLayoutActivity(): Int = R.layout.activity_log_in
-override fun getClassViewModel(): ViewModel = ViewModelProvider(this)[LogInViewModel::class.java]
- */

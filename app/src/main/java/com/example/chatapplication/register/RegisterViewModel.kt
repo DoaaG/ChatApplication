@@ -1,77 +1,90 @@
 package com.example.chatapplication.register
 
-import android.app.AlertDialog
-import android.content.ContentValues.TAG
-import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.example.chatapplication.base.BaseViewModel
+import com.example.chatapplication.isValidEmail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class RegisterViewModel :ViewModel() {
-
+class RegisterViewModel : BaseViewModel<RegisterNavigator>() {
+    //  val auth =  FirebaseAuth.getInstance()
     private var auth: FirebaseAuth = Firebase.auth
+    var registerNavigator: RegisterNavigator? = null
 
-    var firstName : String =""
-    var lastName : String =""
-    var email : String =""
-    var password : String =""
 
-    var firstNameError : String =""
-    var lastNameError : String =""
-    var emailError : String =""
-    var passwordError : String =""
+    var firstName = ObservableField<String?>()
+    var lastName = ObservableField<String?>()
+    var email = ObservableField<String?>()
+    var password = ObservableField<String?>()
+
+    var firstNameError = ObservableField<String?>()
+    var lastNameError = ObservableField<String?>()
+    var emailError = ObservableField<String?>()
+    var passwordError = ObservableField<String?>()
 
 
     fun createAccount() {
-//        if (!isValid()) {
-//            Log.e("createAccount","false")
-//            return
-//        }
-        auth.createUserWithEmailAndPassword(email,password)
+        if (!isValid()) {
+            navigator?.showMessage("Invalid Account")
+            return
+        }
+        navigator?.showLoading("Loading")
+        auth.createUserWithEmailAndPassword(email.get()!!, password.get()!!)
             .addOnCompleteListener {
-                if(it.isSuccessful){
-                    Log.e("createAccount", "signInWithEmail:success")
-                    Log.e("createAccount", "$firstName  $lastName  $email  $password")
-
-                }
-                else{
-                    Log.e("createAccount", "signInWithEmail:failure ${it.exception?.message}")
+                if (it.isSuccessful) {
+                    navigator?.showMessage("Account created successfully")
+                    navigateToLogin()
+                } else {
+                    navigator?.showMessage("${it.exception?.message}")
                 }
             }
+//        registerNavigator?.hide()
 
     }
+
     fun isValid(): Boolean {
         var valid = true
-        if (firstName.isNullOrBlank()) {
+        if (firstName.get().isNullOrBlank()) {
             valid = false
-            firstNameError = "Please Enter a Valid FirstName"
+            firstNameError.set("Please Enter a Valid FirstName")
         } else {
-            firstName = ""
+            firstNameError.set(null)
         }
 
 
-        if (lastName.isNullOrBlank()) {
+        if (lastName.get().isNullOrBlank()) {
             valid = false
-            lastNameError = "Please Enter a Valid LastName"
+            lastNameError.set("Please Enter a Valid LastName")
         } else {
-            lastName = ""
+            lastNameError.set(null)
         }
 
-        if (email.isNullOrBlank()) {
+        if (email.get().isNullOrBlank()) {
             valid = false
-            emailError = "Please Enter a Valid Email"
+            emailError.set("Please Enter a Valid Email")
+        } else if (email.get()?.isValidEmail() == false) {
+            emailError.set("Please Enter a Valid Email")
         } else {
-            email = ""
+            emailError.set(null)
         }
 
-        if (password.isNullOrBlank()) {
+        if (password.get().isNullOrBlank()) {
             valid = false
-            passwordError = "Please Enter a Valid Password"
+            passwordError.set("Please Enter a Valid Password")
         } else {
-            password = ""
+            passwordError.set(null)
         }
 
         return valid
+    }
+
+    fun navigateToLogin() {
+        registerNavigator?.navigate()
+    }
+
+    fun finish() {
+        registerNavigator?.goBack()
     }
 }

@@ -50,13 +50,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/email"
-            error="@{dataLogin.email}"
+            error="@{dataLogin.emailError}"
             app:layout_constraintTop_toBottomOf="@+id/welcome">
 
             <EditText
                 android:id="@+id/editTextEmail"
                 style="@style/fieldsStyle"
-                android:text="@={dataLogin.emailError}"
+                android:text="@={dataLogin.email}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -68,10 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            error="@{dataLogin.password}"
+            error="@{dataLogin.passwordError}"
             android:hint="@string/password"
             app:layout_constraintTop_toBottomOf="@+id/email_Login_TextInputLayout">
-
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -79,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="@={dataLogin.passwordError}"
+                android:text="@={dataLogin.password}"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,8 +112,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:onClick="@{()->dataLogin.createNewAccount()}"
             android:text="@string/or_create_my_account"
             android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_Button" />
