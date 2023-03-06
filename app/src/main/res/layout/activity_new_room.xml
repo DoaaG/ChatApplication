@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_top"
-    tools:context=".NewRoomActivity">
+    tools:context=".newroom.NewRoomActivity">
 
     <ImageView
         android:id="@+id/ic_back_arrow"

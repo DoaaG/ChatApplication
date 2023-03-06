@@ -2,7 +2,10 @@ package com.example.chatapplication.register
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.example.chatapplication.UserProvider
 import com.example.chatapplication.base.BaseViewModel
+import com.example.chatapplication.database.FireStoreUtils
+import com.example.chatapplication.database.models.User
 import com.example.chatapplication.isValidEmail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -34,14 +37,28 @@ class RegisterViewModel : BaseViewModel<RegisterNavigator>() {
         auth.createUserWithEmailAndPassword(email.get()!!, password.get()!!)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    navigator?.showMessage("Account created successfully")
-                    navigateToLogin()
+                    insertUserToDataBase(it.result.user?.uid)
                 } else {
                     navigator?.showMessage("${it.exception?.message}")
                 }
             }
 //        registerNavigator?.hide()
 
+    }
+
+    private fun insertUserToDataBase(uid: String?) {
+        val user = User(id = uid ,firstName = firstName.get(),lastName = lastName.get() , email = email.get())
+        FireStoreUtils().insertUserToDataBase(user).addOnCompleteListener {
+            navigator?.hide()
+            if (it.isSuccessful){
+                UserProvider.user = user
+                navigateToLogin()
+                navigator?.showMessage("Account created successfully")
+            }
+            else{
+                navigator?.showMessage(it.exception?.localizedMessage ?: "")
+            }
+        }
     }
 
     fun isValid(): Boolean {
