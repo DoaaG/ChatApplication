@@ -1,41 +1,46 @@
 package com.example.chatapplication.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.chatapplication.R
+import com.example.chatapplication.base.BaseActivity
 import com.example.chatapplication.databinding.ActivityHomeBinding
 import com.example.chatapplication.newroom.NewRoomActivity
-import com.example.chatapplication.register.RegisterActivity
 
 
-class HomeActivity : AppCompatActivity() {
-    lateinit var roomBinding: ActivityHomeBinding
+class HomeActivity : BaseActivity<HomeVIewModel,ActivityHomeBinding>(),HomeNavigator {
     lateinit var Adapter: RoomAdapter
-    lateinit var list: MutableList<RoomData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        roomBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        createlist()
-        Adapter = RoomAdapter(list)
-        roomBinding.homeContent.roomsRecycler.adapter = Adapter
-        onAddNewRoomClick()
+        binding.homeContent.home = viewModel  // linking with xml
+        viewModel.homeNavigator = this
+
+        Adapter = RoomAdapter(listOf())
+        binding.homeContent.roomsRecycler.adapter = Adapter
+
+        observeRoomLiveData()
+
 
     }
-
-    private fun onAddNewRoomClick() {
-        roomBinding.homeContent.addNewRoomFab.setOnClickListener {
-            var intent = Intent(this, NewRoomActivity::class.java)
-            startActivity(intent)
+    private fun observeRoomLiveData(){
+        viewModel.roomLiveData.observe(this) {
+            Adapter.changeData(it)
         }
     }
 
-    fun createlist() {
-        list = mutableListOf()
-        for (i in 0..10) {
-            list.add(RoomData("category"))
-        }
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadRooms()
+    }
+    override fun getLayoutActivity(): Int = R.layout.activity_home
+
+    override fun getClassViewModel(): HomeVIewModel =
+        ViewModelProvider(this)[HomeVIewModel::class.java]
+
+    override fun createNewRoom() {
+        var intent = Intent(this, NewRoomActivity::class.java)
+        startActivity(intent)
     }
 }

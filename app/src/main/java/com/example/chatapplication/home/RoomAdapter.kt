@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapplication.databinding.RoomItemBinding
+import com.example.chatapplication.database.models.RoomData
 
 
 class RoomAdapter(var roomList : List<RoomData>): RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
@@ -24,5 +25,9 @@ class RoomAdapter(var roomList : List<RoomData>): RecyclerView.Adapter<RoomAdapt
         holder.bind(items)
     }
 
+    fun changeData(newRoomList : List<RoomData>){
+        roomList = newRoomList
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int = roomList.size
 }

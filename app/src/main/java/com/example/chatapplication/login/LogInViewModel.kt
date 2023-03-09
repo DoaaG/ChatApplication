@@ -37,6 +37,7 @@ class LogInViewModel : BaseViewModel<LogInNavigator>()  // for base functions
 
                 } else {
                     navigator?.showMessage("${it.exception?.message}")
+                    loginNavigator?.hide()
                 }
             }
 //        loginNavigator?.hide()
