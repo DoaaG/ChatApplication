@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="home"
+            type="com.example.chatapplication.home.HomeVIewModel" />
 
     </data>
 
@@ -32,6 +35,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_add"
             android:layout_margin="12dp"
+            android:onClick="@{()->home.navToCreateNewRoom()}"
             android:backgroundTint="@color/blue"
             app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

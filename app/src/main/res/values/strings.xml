@@ -23,7 +23,6 @@
     <string name="type_a_message">Type a message</string>
 
     <string-array name="categories">
-        <item>Select Room Category</item>
         <item>Movies</item>
         <item>Music</item>
         <item>Sports</item>

@@ -11,6 +11,7 @@ import com.example.chatapplication.base.BaseActivity
 import com.example.chatapplication.base.BaseNavigator
 import com.example.chatapplication.databinding.ActivityLogInBinding
 import com.example.chatapplication.databinding.ActivityRegisterBinding
+import com.example.chatapplication.home.HomeActivity
 import com.example.chatapplication.register.RegisterActivity
 import com.example.chatapplication.register.RegisterNavigator
 import com.example.chatapplication.register.RegisterViewModel
@@ -35,7 +36,7 @@ class LogInActivity : BaseActivity<LogInViewModel, ActivityLogInBinding>(), LogI
     }
 
     override fun navigateToHome() {
-        var intent = Intent(this, MainActivity::class.java)
+        var intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)    }
 
 }
