@@ -1,29 +1,44 @@
 package com.example.chatapplication.messages
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import com.example.chatapplication.R
+import com.example.chatapplication.UserProvider
+import com.example.chatapplication.base.BaseActivity
+import com.example.chatapplication.database.models.MessageData
+import com.example.chatapplication.database.models.RoomData
 import com.example.chatapplication.databinding.ActivityChatMessageBinding
+import java.util.*
 
-class ChatMessageActivity : AppCompatActivity() {
-    lateinit var messageBinding: ActivityChatMessageBinding
-    lateinit var Adapter: MessageAdapter
-    lateinit var list: MutableList<MessageData>
+class ChatMessageActivity : BaseActivity<ChatViewModel, ActivityChatMessageBinding>(),
+    ChatNavigator {
+    private lateinit var Adapter: MessageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        messageBinding = DataBindingUtil.setContentView(this, R.layout.activity_chat_message)
-        createlist()
-        Adapter = MessageAdapter(list)
-        messageBinding.chatRecycler.adapter = Adapter
+        binding.chat = viewModel
+        viewModel.chatNavigator = this
+        viewModel.roomPosition = intent.getSerializableExtra("roomPosition") as RoomData
+        Adapter = MessageAdapter(listOf())
+        binding.chatRecycler.adapter = Adapter
+        viewModel.loadMessages()
+        observeMessagesLiveData()
 
     }
 
- fun createlist() {
-        list = mutableListOf()
-        for (i in 0..10) {
-            list.add(MessageData("new message found" ,"10 AM"))
+    override fun getLayoutActivity(): Int = R.layout.activity_chat_message
+
+    override fun getClassViewModel(): ChatViewModel =
+        ViewModelProvider(this)[ChatViewModel::class.java]
+
+    private fun observeMessagesLiveData(){
+        viewModel.messagesLiveData.observe(this){
+                Adapter.changeData(it)
         }
+    }
+
+    override fun back() {
+        finish()
     }
 }

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="messageItem"
-            type="com.example.chatapplication.messages.MessageData" />
+            type="com.example.chatapplication.database.models.MessageData" />
 
     </data>
 
@@ -20,7 +20,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/chat_item_corners"
             android:padding="12dp"
-            android:text="new message"
+            android:text="@={messageItem.message}"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,14 +29,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/chat_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3:18 PM"
             android:layout_margin="8dp"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chat_text" />
-
+<!--        setTime="@{messageItem.setTime()}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

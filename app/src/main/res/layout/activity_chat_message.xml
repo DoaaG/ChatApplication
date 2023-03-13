@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="chat"
+            type="com.example.chatapplication.messages.ChatViewModel" />
+
+        <variable
+            name="roomTitle"
+            type="com.example.chatapplication.database.models.RoomData" />
 
     </data>
 
@@ -18,7 +25,8 @@
             style="@style/titleStyle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="@string/the_movies_zone"
+            android:text="@{roomTitle.roomName}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,10 +35,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_back"
+            android:onClick="@{()->chat.back()}"
             app:layout_constraintBottom_toBottomOf="@id/movies_zone_TextView"
             app:layout_constraintStart_toStartOf="@id/movies_zone_TextView"
             app:layout_constraintTop_toTopOf="@id/movies_zone_TextView" />
-        <!--        android:onClick="@{()->dataRegister.finish()}"-->
+
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -75,7 +84,8 @@
                         android:layout_height="0dp"
                         android:layout_margin="8dp"
                         android:padding="8dp"
-                        android:text="@string/type_a_message"
+                        android:text="@={chat.message}"
+                        android:hint="@string/type_a_message"
                         android:background="@drawable/send_message_corners"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +100,7 @@
                         android:layout_margin="8dp"
                         android:drawableEnd="@drawable/send"
                         android:padding="8dp"
+                        android:onClick="@{()->chat.sendMessage()}"
                         android:text="send"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

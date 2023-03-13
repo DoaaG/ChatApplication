@@ -17,7 +17,7 @@ class HomeActivity : BaseActivity<HomeVIewModel,ActivityHomeBinding>(),HomeNavig
         binding.homeContent.home = viewModel  // linking with xml
         viewModel.homeNavigator = this
 
-        Adapter = RoomAdapter(listOf())
+        Adapter = RoomAdapter(this,listOf())
         binding.homeContent.roomsRecycler.adapter = Adapter
 
         observeRoomLiveData()

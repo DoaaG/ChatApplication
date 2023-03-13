@@ -3,6 +3,8 @@ package com.example.chatapplication.messages
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.chatapplication.database.models.MessageData
+import com.example.chatapplication.database.models.RoomData
 import com.example.chatapplication.databinding.ChatItemBinding
 
 class MessageAdapter(var messagesList : List<MessageData>): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
@@ -24,4 +26,10 @@ class MessageAdapter(var messagesList : List<MessageData>): RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int = messagesList.size
+
+    fun changeData(newMessageList: List<MessageData>) {
+        messagesList = newMessageList
+        notifyDataSetChanged()
+    }
+
 }
