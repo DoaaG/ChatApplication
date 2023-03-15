@@ -11,6 +11,7 @@
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.1165" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/drawable/ic_menu.xml" value="0.132" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/drawable/ic_rrow_back.xml" value="0.1" />
+        <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/drawable/recived_item_corners.xml" value="0.10400000000000001" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/drawable/send_message_corners.xml" value="0.1215" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/activity_chat_message.xml" value="0.2" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/activity_home.xml" value="0.25" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/chat_item.xml" value="0.2" />
+        <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/chat_recived_item.xml" value="0.24895833333333334" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/home_content.xml" value="0.2484375" />
         <entry key="..\:/Android projects/Route Projects/practicee/ChatApplication/app/src/main/res/layout/room_item.xml" value="0.20384615384615384" />
       </map>

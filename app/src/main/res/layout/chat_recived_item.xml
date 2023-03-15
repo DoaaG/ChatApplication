@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="messageItem"
             type="com.example.chatapplication.database.models.MessageData" />
@@ -14,30 +15,29 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/sender_name"
+            android:id="@+id/receiver_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@={messageItem.senderName}"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/chat_text"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/chat_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/chat_item_corners"
+            android:background="@drawable/received_item_corners"
             android:padding="8dp"
             android:text="@={messageItem.message}"
             android:textColor="@color/white"
             android:textSize="21sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/chat_time"
@@ -49,7 +49,7 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chat_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
