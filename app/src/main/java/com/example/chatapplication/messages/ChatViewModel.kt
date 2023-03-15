@@ -8,6 +8,7 @@ import com.example.chatapplication.base.BaseViewModel
 import com.example.chatapplication.database.FireStoreUtils
 import com.example.chatapplication.database.models.MessageData
 import com.example.chatapplication.database.models.RoomData
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.toObject
 import java.util.*
 
@@ -17,11 +18,14 @@ class ChatViewModel : BaseViewModel<ChatNavigator>() {
     var messagesLiveData = MutableLiveData<MutableList<MessageData>>()
     lateinit var roomPosition: RoomData
 
+
+
     fun back() {
         chatNavigator?.back()
     }
 
     fun sendMessage() {
+
         val message = MessageData(
             message = message.get()!!,
             time = Calendar.getInstance().time,
@@ -38,7 +42,7 @@ class ChatViewModel : BaseViewModel<ChatNavigator>() {
     }
 
     fun loadMessages() {
-        FireStoreUtils().getMessages(roomPosition)
+        FireStoreUtils().getMessages(roomPosition).orderBy("time")
             .addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.e("loadMessage", "Listen failed.", e)

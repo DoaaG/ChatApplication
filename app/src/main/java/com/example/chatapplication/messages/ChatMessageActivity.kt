@@ -35,6 +35,7 @@ class ChatMessageActivity : BaseActivity<ChatViewModel, ActivityChatMessageBindi
     private fun observeMessagesLiveData(){
         viewModel.messagesLiveData.observe(this){
                 Adapter.changeData(it)
+            binding.typeMessageTextView.text.clear()
         }
     }
 
